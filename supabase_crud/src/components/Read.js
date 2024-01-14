@@ -13,19 +13,18 @@ export default function Read() {
     }, []);
     const fetchData = async () => {
         try {
-            let { data, error } = await supabase
+            let { supabaseData, error } = await supabase
                 .from('newTable')
                 .select('*');
 
             if (error) {
                 console.error(error);
             }
-
-            setData(data || []);
+            setData(supabaseData || []);
         } catch (error) {
             console.error('Error fetching data:', error.message);
         }
-    };
+    }
     fetchData()
     return (
         <div>
