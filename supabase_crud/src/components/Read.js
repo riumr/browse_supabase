@@ -1,10 +1,5 @@
 import { useState, useEffect } from 'react';
-
-const { createClient } = require('@supabase/supabase-js');
-const SUPABASE_URL = process.env.REACT_APP_SUPABASE_URL;
-const SUPABASE_KEY = process.env.REACT_APP_SUPABASE_KEY;
-
-const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+import { supabase } from './supabase';
 
 export default function Read() {
     const [data, setData] = useState([]);
@@ -13,14 +8,14 @@ export default function Read() {
     }, []);
     const fetchData = async () => {
         try {
-            let { supabaseData, error } = await supabase
+            let { data, error } = await supabase
                 .from('newTable')
                 .select('*');
 
             if (error) {
                 console.error(error);
             }
-            setData(supabaseData || []);
+            setData(data || []);
         } catch (error) {
             console.error('Error fetching data:', error.message);
         }
