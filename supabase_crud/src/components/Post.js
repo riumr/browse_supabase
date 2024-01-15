@@ -1,11 +1,15 @@
-const { createClient } = require('@supabase/supabase-js');
-const SUPABASE_URL = process.env.REACT_APP_SUPABASE_URL;
-const SUPABASE_KEY = process.env.REACT_APP_SUPABASE_KEY;
+import { supabase } from "./supabase"
 
-const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+export default function Post() {
+    return (
+        <div>
+            <button onClick={post}>post</button>
+        </div>
+    )
+}
 
-export default async function post() {
+const post = async () => {
     await supabase
         .from('newTable')
-        .insert({ id: "3", oneColumn: 'added' })
+        .insert({ id: "4", oneColumn: 'added' })
 }
