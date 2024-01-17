@@ -11,5 +11,5 @@ export default function Post() {
 const post = async () => {
     await supabase
         .from('newTable')
-        .insert({ id: "4", oneColumn: 'added' })
+        .insert({ id: "5", oneColumn: 'added' })
 }
