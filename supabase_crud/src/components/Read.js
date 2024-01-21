@@ -20,22 +20,21 @@ export default function Read() {
             console.error('Error fetching data:', error.message);
         }
     }
-    const deleteItem = (rowId) => {
-        supabase
+    fetchData()
+    const deleteRow = async (rowId) => {
+        await supabase
             .from('newTable')
             .delete()
             .eq('id', rowId)
     }
     return (
-        <div>
-            <ul>
-                {data.map((item) => (
-                    <>
-                        <li key={item.id}>{item.oneColumn}</li>
-                        <button onClick={deleteItem(item.id)}>Delete</button>
-                    </>
-                ))}
-            </ul>
-        </div>
+        <ul>
+            {data.map((item) => (
+                <>
+                    <li key={item.id}>{item.oneColumn}</li>
+                    <button onClick={() => deleteRow(item.id)}>Delete</button>
+                </>
+            ))}
+        </ul>
     )
 }
