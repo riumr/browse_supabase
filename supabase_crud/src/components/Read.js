@@ -4,6 +4,7 @@ import { supabase } from './supabase';
 export default function Read() {
     const [data, setData] = useState([]);
     const [isEditing, setEditing] = useState(false);
+    const [text, setText] = useState("")
     useEffect(() => {
         fetchData()
     }, []);
@@ -32,11 +33,12 @@ export default function Read() {
     }
 
     // 열 수정
-    const editRow = async (rowId) => {
+    const editRow = async (rowId, text) => {
         await supabase
             .from('newTable')
-            .update({ 'oneColumn': 'column changed' })
+            .update({ 'oneColumn': text })
             .eq('id', rowId)
+        fetchData() // 수정 후 다시 데이터 불러오기
     }
 
     const handleEditClick = () => {
@@ -45,6 +47,11 @@ export default function Read() {
 
     const handleBlur = () => {
         setEditing(false);
+        editRow()
+    };
+
+    const handleInputChange = (e) => {
+        setText(e.target.value);
     };
 
     return (
@@ -55,14 +62,13 @@ export default function Read() {
                         <input
                             type="text"
                             value={item.oneColumn}
-                            onChange={editRow}
+                            onChange={handleInputChange}
                             onBlur={handleBlur}
                         />
                     ) : (
-                        <li key={item.id} onClick={handleEditClick}>{item.oneColumn}</li>
+                        <li key={item.id} onClick={handleEditClick}>{item.oneColumn || text}</li>
                     )}
                     <button onClick={() => deleteRow(item.id)}>Delete</button>
-                    <button onClick={() => editRow(item.id)}>Edit</button>
                 </>
             ))}
         </ul>
