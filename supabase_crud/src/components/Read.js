@@ -4,7 +4,9 @@ import { supabase } from './supabase';
 export default function Read() {
     const [data, setData] = useState([]);
     const [isEditing, setEditing] = useState(false);
-    const [text, setText] = useState("")
+    const [editedText, setEditedText] = useState("");
+    const [editedRowId, setEditedRowId] = useState(null);
+
     useEffect(() => {
         fetchData()
     }, []);
@@ -22,7 +24,6 @@ export default function Read() {
             console.error('Error fetching data:', error.message);
         }
     }
-    fetchData()
 
     // 열 삭제
     const deleteRow = async (rowId) => {
@@ -30,6 +31,7 @@ export default function Read() {
             .from('newTable')
             .delete()
             .eq('id', rowId)
+        fetchData()
     }
 
     // 열 수정
@@ -38,36 +40,44 @@ export default function Read() {
             .from('newTable')
             .update({ 'oneColumn': text })
             .eq('id', rowId)
-        fetchData() // 수정 후 다시 데이터 불러오기
+        fetchData()
     }
 
-    const handleEditClick = () => {
+    const handleEditClick = (rowId, oneColumn) => {
         setEditing(true);
+        setEditedRowId(rowId);
+        setEditedText(oneColumn);
     };
 
     const handleBlur = () => {
-        setEditing(false);
-        editRow()
+        if (editedRowId !== null) {
+            setEditing(false);
+            editRow(editedRowId, editedText);
+            setEditedRowId(null);
+        }
     };
 
     const handleInputChange = (e) => {
-        setText(e.target.value);
+        setEditedText(e.target.value);
     };
 
     return (
         <ul>
             {data.map((item) => (
                 <>
-                    {isEditing ? (
+                    {isEditing && editedRowId === item.id ? (
                         <input
                             type="text"
-                            value={item.oneColumn}
+                            value={editedText}
                             onChange={handleInputChange}
                             onBlur={handleBlur}
                         />
                     ) : (
-                        <li key={item.id} onClick={handleEditClick}>{item.oneColumn || text}</li>
+                        <li onClick={() => handleEditClick(item.id, item.oneColumn)}>
+                            {item.oneColumn}
+                        </li>
                     )}
+
                     <button onClick={() => deleteRow(item.id)}>Delete</button>
                 </>
             ))}
