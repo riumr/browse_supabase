@@ -1,14 +1,15 @@
 import { useState } from "react";
-import { supabase } from "./supabase"
 
-export default function Post() {
+export default function PostForm({ runThis }) {
     const [rowId, setRowId] = useState(0);
     const [rowText, setRowText] = useState('');
-    const post = async () => {
-        await supabase
-            .from('newTable')
-            .insert({ id: rowId, oneColumn: rowText })
+
+    const handleOnclickEvent = () => {
+        runThis({ id: rowId, oneColumn: rowText })
+        setRowId(0)
+        setRowText("")
     }
+
     return (
         <div>
             <label>
@@ -26,7 +27,7 @@ export default function Post() {
                     onChange={e => setRowText(e.target.value)}
                 />
             </label>
-            <button onClick={post}>post</button>
+            <button onClick={handleOnclickEvent}>post</button>
         </div>
     )
 }

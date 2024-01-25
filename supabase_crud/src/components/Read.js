@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { supabase } from './supabase';
+import PostForm from './PostForm';
 
 export default function Read() {
     const [data, setData] = useState([]);
@@ -10,6 +11,7 @@ export default function Read() {
     useEffect(() => {
         fetchData()
     }, []);
+
     const fetchData = async () => {
         try {
             let { data, error } = await supabase
@@ -50,8 +52,8 @@ export default function Read() {
     };
 
     const handleBlur = () => {
+        setEditing(false);
         if (editedRowId !== null) {
-            setEditing(false);
             editRow(editedRowId, editedText);
             setEditedRowId(null);
         }
@@ -61,26 +63,36 @@ export default function Read() {
         setEditedText(e.target.value);
     };
 
-    return (
-        <ul>
-            {data.map((item) => (
-                <>
-                    {isEditing && editedRowId === item.id ? (
-                        <input
-                            type="text"
-                            value={editedText}
-                            onChange={handleInputChange}
-                            onBlur={handleBlur}
-                        />
-                    ) : (
-                        <li onClick={() => handleEditClick(item.id, item.oneColumn)}>
-                            {item.oneColumn}
-                        </li>
-                    )}
+    // 열 추가
+    const post = async (inputFromComponent) => {
+        await supabase
+            .from('newTable')
+            .insert(inputFromComponent)
+        fetchData()
+    }
 
-                    <button onClick={() => deleteRow(item.id)}>Delete</button>
-                </>
-            ))}
-        </ul>
+    return (
+        <>
+            <PostForm runThis={post} />
+            <ul>
+                {data.map((item) => (
+                    <>
+                        {isEditing && editedRowId === item.id ? (
+                            <input
+                                type="text"
+                                value={editedText}
+                                onChange={handleInputChange}
+                                onBlur={handleBlur}
+                            />
+                        ) : (
+                            <li onClick={() => handleEditClick(item.id, item.oneColumn)}>
+                                {item.oneColumn}
+                            </li>
+                        )}
+                        <button onClick={() => deleteRow(item.id)}>Delete</button>
+                    </>
+                ))}
+            </ul>
+        </>
     )
 }
