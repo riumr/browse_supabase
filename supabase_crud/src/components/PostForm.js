@@ -1,11 +1,11 @@
 import { useState } from "react";
 
-export default function PostForm({ runThis }) {
+export default function PostForm({ submitFunction }) {
     const [rowId, setRowId] = useState(0);
     const [rowText, setRowText] = useState('');
 
     const handleOnclickEvent = () => {
-        runThis({ id: rowId, oneColumn: rowText })
+        submitFunction({ id: rowId, oneColumn: rowText })
         setRowId(0)
         setRowText("")
     }

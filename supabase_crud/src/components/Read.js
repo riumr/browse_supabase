@@ -65,15 +65,19 @@ export default function Read() {
 
     // 열 추가
     const post = async (inputFromComponent) => {
-        await supabase
-            .from('newTable')
-            .insert(inputFromComponent)
-        fetchData()
+        try {
+            await supabase
+                .from('newTable')
+                .insert(inputFromComponent)
+            fetchData()
+        } catch (error) {
+            console.error(error.message)
+        }
     }
 
     return (
         <>
-            <PostForm runThis={post} />
+            <PostForm submitFunction={post} />
             <ul>
                 {data.map((item) => (
                     <>
