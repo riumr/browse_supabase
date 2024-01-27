@@ -1,4 +1,14 @@
 .App {
+    height: 75vh;
     display: flex;
     justify-content: center;
+    align-items: flex-end;
 }
+
+.wrap {
+    width: 390px;
+    min-height: 530px;
+    border: 1px solid black;
+    border-radius: 20px;
+}
+
