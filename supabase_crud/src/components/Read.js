@@ -75,12 +75,17 @@ export default function Read() {
         }
     }
 
+    const postStyle = {
+        display: 'flex',
+        justifyContent: 'space-between'
+    }
+
     return (
         <>
             <PostForm submitFunction={post} />
-            <ul>
+            <div>
                 {data.map((item) => (
-                    <>
+                    <div>
                         {isEditing && editedRowId === item.id ? (
                             <input
                                 type="text"
@@ -89,14 +94,17 @@ export default function Read() {
                                 onBlur={handleBlur}
                             />
                         ) : (
-                            <li onClick={() => handleEditClick(item.id, item.oneColumn)}>
+                            <li style={postStyle} onClick={() => handleEditClick(item.id, item.oneColumn)}>
                                 {item.oneColumn}
+                                <div>
+                                    <button onClick={() => deleteRow(item.id)}>Update</button>
+                                    <button onClick={() => deleteRow(item.id)}>Delete</button>
+                                </div>
                             </li>
                         )}
-                        <button onClick={() => deleteRow(item.id)}>Delete</button>
-                    </>
+                    </div>
                 ))}
-            </ul>
+            </div>
         </>
     )
 }
