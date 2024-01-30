@@ -23,7 +23,7 @@ export default function PostForm({ submitFunction }) {
         height: '80px',
         padding: '0 0 0 0',
         margin: '0 0 0 0',
-        border: 'none',
+        border: '1px solid black',
         verticalAlign: 'top',
     }
 
