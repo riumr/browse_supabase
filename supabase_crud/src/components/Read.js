@@ -46,20 +46,16 @@ export default function Read() {
     }
 
     const handleEditClick = (rowId, oneColumn) => {
-        setEditing(true);
+        setEditing(!isEditing);
         setEditedRowId(rowId);
         setEditedText(oneColumn);
-    };
-
-    const handleBlur = () => {
-        setEditing(false);
         if (editedRowId !== null) {
             editRow(editedRowId, editedText);
             setEditedRowId(null);
         }
     };
 
-    const handleInputChange = (e) => {
+    const onChangeFunction = (e) => {
         setEditedText(e.target.value);
     };
 
@@ -76,8 +72,11 @@ export default function Read() {
     }
 
     const postStyle = {
+        height: "80px",
         display: 'flex',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        padding: '15px 10px 0 10px',
+        border: '1px solid black'
     }
 
     return (
@@ -87,18 +86,22 @@ export default function Read() {
                 {data.map((item) => (
                     <div>
                         {isEditing && editedRowId === item.id ? (
-                            <input
-                                type="text"
-                                value={editedText}
-                                onChange={handleInputChange}
-                                onBlur={handleBlur}
-                            />
+                            <>
+                                <input
+                                    style={postStyle}
+                                    type="text"
+                                    value={editedText}
+                                    onChange={onChangeFunction}
+                                />
+                                <button onClick={() => handleEditClick(item.id)}>Update</button>
+                            </>
                         ) : (
-                            <li style={postStyle} onClick={() => handleEditClick(item.id, item.oneColumn)}>
+                            <li style={postStyle}>
                                 {item.oneColumn}
                                 <div>
-                                    <button onClick={() => deleteRow(item.id)}>Update</button>
-                                    <button onClick={() => deleteRow(item.id)}>Delete</button>
+                                    <button onClick={() => handleEditClick(item.id)}>수정</button>
+                                    <img src="{deleteButton}" alt="deleteButton" onClick={() => deleteRow(item.id)} />
+
                                 </div>
                             </li>
                         )}
