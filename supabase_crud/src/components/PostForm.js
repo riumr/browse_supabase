@@ -1,51 +1,62 @@
 import { useState } from "react";
 
 export default function PostForm({ submitFunction }) {
-    const [rowId, setRowId] = useState(0);
-    const [rowText, setRowText] = useState('');
+    const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
 
     const handleOnclickEvent = () => {
-        submitFunction({ id: rowId, oneColumn: rowText })
-        setRowId(0)
-        setRowText("")
+        submitFunction({ title: title, content: content })
+        setTitle("")
+        setContent("")
     }
 
     // 스타일
-    const inputIdStyle = {
+
+    const inputTitleStyle = {
         width: '100%',
+        height: '30px',
         padding: '0 0 0 0',
-        margin: '20px 0 0 0',
-        border: 'none',
+        border: '1px solid black',
+        borderLeftStyle: 'none',
+        borderRightStyle: 'none',
+        borderBottomStyle: 'none',
+        borderRadius: '20px 20px 0 0'
     }
 
-    const inputTextStyle = {
+    const inputContentStyle = {
         width: '100%',
         height: '80px',
         padding: '0 0 0 0',
-        margin: '0 0 0 0',
         border: '1px solid black',
-        verticalAlign: 'top',
+        borderLeftStyle: 'none',
+        borderRightStyle: 'none',
+        borderTopStyle: 'none',
     }
 
     const postButtonStyle = {
         width: '100%',
+        height: '100%',
+        margin: "0 0 0 0",
+        borderStyle: 'none'
+    }
+
+    const testStyle = {
+        position: 'sticky',
+        top: '90px'
     }
 
     return (
-        <div>
+        <div style={testStyle}>
             <div>
                 <input
-                    style={inputIdStyle}
-                    value={rowId}
-                    onChange={e => setRowId(e.target.value)}
-                    type="number"
+                    style={inputTitleStyle}
+                    value={title}
+                    onChange={e => setTitle(e.target.value)}
                 />
-            </div>
-            <div>
                 <input
-                    style={inputTextStyle}
-                    value={rowText}
-                    onChange={e => setRowText(e.target.value)}
+                    style={inputContentStyle}
+                    value={content}
+                    onChange={e => setContent(e.target.value)}
                 />
             </div>
             <button style={postButtonStyle} onClick={handleOnclickEvent}>post</button>
