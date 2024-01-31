@@ -5,7 +5,8 @@ import PostForm from './PostForm';
 export default function Read() {
     const [data, setData] = useState([]);
     const [isEditing, setEditing] = useState(false);
-    const [editedText, setEditedText] = useState("");
+    const [editedTitle, setEditedTitle] = useState("");
+    const [editedContent, setEditedContent] = useState("");
     const [editedRowId, setEditedRowId] = useState(null);
 
     useEffect(() => {
@@ -37,26 +38,31 @@ export default function Read() {
     }
 
     // 열 수정
-    const editRow = async (rowId, text) => {
+    const editRow = async (rowId, title, content) => {
         await supabase
             .from('newTable')
-            .update({ 'oneColumn': text })
+            .update({ 'title': title, 'content': content })
             .eq('id', rowId)
         fetchData()
     }
 
-    const handleEditClick = (rowId, oneColumn) => {
+    const handleEditClick = (rowId, title, content) => {
         setEditing(!isEditing);
         setEditedRowId(rowId);
-        setEditedText(oneColumn);
+        setEditedTitle(title);
+        setEditedContent(content);
         if (editedRowId !== null) {
-            editRow(editedRowId, editedText);
+            editRow(editedRowId, editedTitle, editedContent);
             setEditedRowId(null);
         }
     };
 
-    const onChangeFunction = (e) => {
-        setEditedText(e.target.value);
+    const titleChange = (e) => {
+        setEditedTitle(e.target.value);
+    };
+
+    const contentChange = (e) => {
+        setEditedContent(e.target.value);
     };
 
     // 열 추가
@@ -71,16 +77,40 @@ export default function Read() {
         }
     }
 
+
+    const inputTitleStyle = {
+        width: '100%',
+        height: '30px',
+        padding: '0 0 0 0',
+        border: '1px solid black',
+        borderLeftStyle: 'none',
+        borderRightStyle: 'none',
+        borderBottomStyle: 'none',
+    }
+
+    const inputContentStyle = {
+        width: '100%',
+        height: '80px',
+        padding: '0 0 0 0',
+        border: '1px solid black',
+        borderLeftStyle: 'none',
+        borderRightStyle: 'none',
+        borderTopStyle: 'none',
+    }
+
     const postStyle = {
         height: "80px",
         display: 'flex',
         justifyContent: 'space-between',
         padding: '15px 10px 0 10px',
-        border: '1px solid black'
+        border: '1px solid black',
+        borderLeftStyle: 'none',
+        borderRightStyle: 'none',
+        borderTopStyle: 'none'
     }
 
     return (
-        <>
+        <div>
             <PostForm submitFunction={post} />
             <div>
                 {data.map((item) => (
@@ -88,26 +118,34 @@ export default function Read() {
                         {isEditing && editedRowId === item.id ? (
                             <>
                                 <input
-                                    style={postStyle}
+                                    style={inputTitleStyle}
                                     type="text"
-                                    value={editedText}
-                                    onChange={onChangeFunction}
+                                    value={editedTitle}
+                                    onChange={titleChange}
                                 />
-                                <button onClick={() => handleEditClick(item.id)}>Update</button>
+                                <input
+                                    style={inputContentStyle}
+                                    type="text"
+                                    value={editedContent}
+                                    onChange={contentChange}
+                                />
+                                <button onClick={() => handleEditClick(item.id)}>수정</button>
                             </>
                         ) : (
                             <li style={postStyle}>
-                                {item.oneColumn}
+                                <div>
+                                    <div>{item.title}</div>
+                                    <div>{item.content}</div>
+                                </div>
                                 <div>
                                     <button onClick={() => handleEditClick(item.id)}>수정</button>
-                                    <img src="{deleteButton}" alt="deleteButton" onClick={() => deleteRow(item.id)} />
-
+                                    <button onClick={() => deleteRow(item.id)}>삭제</button>
                                 </div>
                             </li>
                         )}
                     </div>
                 ))}
             </div>
-        </>
+        </div>
     )
 }
