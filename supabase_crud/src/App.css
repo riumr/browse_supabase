@@ -1,14 +1,16 @@
 .App {
-    height: 75vh;
+    height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
 }
 
 .wrap {
-    width: 390px;
+    width: 530px;
     min-height: 530px;
     border: 1px solid black;
     border-radius: 20px;
+    margin-top: 30vh;
+    border-top-style: none;
 }
 
