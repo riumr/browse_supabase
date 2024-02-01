@@ -109,10 +109,15 @@ export default function Read() {
         borderTopStyle: 'none'
     }
 
+    const postGroupStyle = {
+        height: '600px',
+        overflowY: 'auto'
+    }
+
     return (
         <div>
             <PostForm submitFunction={post} />
-            <div>
+            <div style={postGroupStyle}>
                 {data.map((item) => (
                     <div>
                         {isEditing && editedRowId === item.id ? (
