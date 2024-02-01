@@ -40,13 +40,9 @@ export default function PostForm({ submitFunction }) {
         borderStyle: 'none'
     }
 
-    const testStyle = {
-        position: 'sticky',
-        top: '90px'
-    }
 
     return (
-        <div style={testStyle}>
+        <div>
             <div>
                 <input
                     style={inputTitleStyle}
