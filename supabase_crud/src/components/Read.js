@@ -99,14 +99,19 @@ export default function Read() {
     }
 
     const postStyle = {
-        height: "80px",
+        height: "110px",
         display: 'flex',
         justifyContent: 'space-between',
         padding: '15px 10px 0 10px',
         border: '1px solid black',
         borderLeftStyle: 'none',
         borderRightStyle: 'none',
-        borderTopStyle: 'none'
+        borderTopStyle: 'none',
+        fontSize: '23px'
+    }
+
+    const contentStyle = {
+        margin: '17px 0 0 0',
     }
 
     const postGroupStyle = {
@@ -133,6 +138,7 @@ export default function Read() {
                                     type="text"
                                     value={editedContent}
                                     onChange={contentChange}
+                                    placeholder='내용'
                                 />
                                 <button onClick={() => handleEditClick(item.id)}>수정</button>
                             </>
@@ -140,7 +146,7 @@ export default function Read() {
                             <li style={postStyle}>
                                 <div>
                                     <div>{item.title}</div>
-                                    <div>{item.content}</div>
+                                    <div style={contentStyle}>{item.content}</div>
                                 </div>
                                 <div>
                                     <button onClick={() => handleEditClick(item.id)}>수정</button>
