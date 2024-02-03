@@ -138,7 +138,6 @@ export default function Read() {
                                     type="text"
                                     value={editedContent}
                                     onChange={contentChange}
-                                    placeholder='내용'
                                 />
                                 <button onClick={() => handleEditClick(item.id)}>수정</button>
                             </>
