@@ -15,24 +15,26 @@ export default function PostForm({ submitFunction }) {
     const inputTitleStyle = {
         width: '100%',
         height: '40px',
-        padding: '0 0 0 0',
+        padding: '0 0 0 10px',
         border: '1px solid black',
         borderLeftStyle: 'none',
         borderRightStyle: 'none',
         borderBottomStyle: 'none',
         borderRadius: '20px 20px 0 0',
         fontSize: '20px',
+        boxSizing: 'border-box'
     }
 
     const inputContentStyle = {
         width: '100%',
         height: '80px',
-        padding: '0 0 0 0',
+        padding: '20px 0 0 10px',
         border: '1px solid black',
         borderLeftStyle: 'none',
         borderRightStyle: 'none',
         borderTopStyle: 'none',
         fontSize: '20px',
+        boxSizing: 'border-box'
     }
 
     const postButtonStyle = {
@@ -49,13 +51,13 @@ export default function PostForm({ submitFunction }) {
                     style={inputTitleStyle}
                     value={title}
                     onChange={e => setTitle(e.target.value)}
-                    placeholder="   Title"
+                    placeholder="TITLE"
                 />
-                <input
+                <textarea
                     style={inputContentStyle}
                     value={content}
                     onChange={e => setContent(e.target.value)}
-                    placeholder="   Content"
+                    placeholder="CONTENT"
                 />
             </div>
             <button style={postButtonStyle} onClick={handleOnclickEvent}>post</button>
