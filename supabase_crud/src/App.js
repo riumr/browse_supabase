@@ -1,11 +1,11 @@
-import Read from "./components/Read";
+import Main from "./components/Main";
 import "./App.css"
 
 function App() {
   return (
     <div className="App">
       <div className="wrap">
-        <Read />
+        <Main />
       </div>
     </div>
   );
