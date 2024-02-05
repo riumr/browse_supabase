@@ -80,24 +80,27 @@ export default function Read() {
     const inputTitleStyle = {
         width: '100%',
         height: '30px',
-        padding: '0 0 0 0',
+        padding: '0 0 0 10px',
         border: '1px solid black',
         borderLeftStyle: 'none',
         borderRightStyle: 'none',
         borderBottomStyle: 'none',
         borderTopStyle: 'none',
         fontFamily: 'NanumGothic',
+        fontSize: '23px'
     }
 
     const inputContentStyle = {
         width: '100%',
         height: '80px',
-        padding: '0 0 0 0',
+        padding: '0 0 0 10px',
+        margin: '0 0 0 0',
         border: '1px solid black',
         borderLeftStyle: 'none',
         borderRightStyle: 'none',
         borderTopStyle: 'none',
         fontFamily: 'NanumGothic',
+        fontSize: '23px'
     }
 
     const postStyle = {
@@ -151,7 +154,7 @@ export default function Read() {
                 {data.map((item) => (
                     <div>
                         {isEditing && editedRowId === item.id ? (
-                            <>
+                            <div>
                                 <div style={titleEditBtn}>
                                     <input
                                         style={inputTitleStyle}
@@ -167,7 +170,7 @@ export default function Read() {
                                     defaultValue={item.content}
                                     onChange={contentChange}
                                 />
-                            </>
+                            </div>
                         ) : (
                             <li style={postStyle}>
                                 <div>
