@@ -1,1 +1,4 @@
 supabase_crud/.env
+
+# Local Netlify folder
+.netlify
