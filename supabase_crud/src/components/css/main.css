@@ -6,11 +6,19 @@
     border: 1px solid black;
 }
 
+.editBtn:hover {
+    background-color: rgb(230, 230, 230);
+}
+
 .deleteBtn {
     width: 40px;
     height: 28px;
     background-color: white;
     border-radius: 5px;
     border: 1px solid black;
-    margin: 0 0 0 3px;
+    margin: 0 0 0 5px;
+}
+
+.deleteBtn:hover {
+    background-color: rgb(230, 230, 230);
 }

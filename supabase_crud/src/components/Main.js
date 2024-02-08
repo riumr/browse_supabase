@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { supabase } from './supabase';
+import './css/main.css'
 import Post from './Post';
 
 export default function Read() {
@@ -125,23 +126,6 @@ export default function Read() {
         overflowY: 'auto'
     }
 
-    const editBtn = {
-        width: '40px',
-        height: '28px',
-        backgroundColor: 'white',
-        borderRadius: '5px',
-        border: '1px solid black'
-    }
-
-    const deleteBtn = {
-        width: '40px',
-        height: '28px',
-        backgroundColor: 'white',
-        borderRadius: '5px',
-        border: '1px solid black',
-        margin: '0 0 0 3px'
-    }
-
     const titleEditBtn = {
         display: 'flex',
         margin: '15px 10px 0 0'
@@ -162,7 +146,7 @@ export default function Read() {
                                         defaultValue={item.title}
                                         onChange={titleChange}
                                     />
-                                    <button style={editBtn} onClick={() => handleEditClick(item.id)}>수정</button>
+                                    <button className='editBtn' onClick={() => handleEditClick(item.id)}>수정</button>
                                 </div>
                                 <input
                                     style={inputContentStyle}
@@ -178,8 +162,8 @@ export default function Read() {
                                     <div style={contentStyle}>{item.content}</div>
                                 </div>
                                 <div>
-                                    <button style={editBtn} onClick={() => handleEditClick(item.id)}>수정</button>
-                                    <button style={deleteBtn} onClick={() => deleteRow(item.id)}>삭제</button>
+                                    <button className='editBtn' onClick={() => handleEditClick(item.id)}>수정</button>
+                                    <button className='deleteBtn' onClick={() => deleteRow(item.id)}>삭제</button>
                                 </div>
                             </li>
                         )}
