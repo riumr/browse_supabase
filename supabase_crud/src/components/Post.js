@@ -11,7 +11,6 @@ export default function Post({ submitFunction }) {
     }
 
     // 스타일
-
     const inputTitleStyle = {
         width: '100%',
         height: '40px',
@@ -23,7 +22,6 @@ export default function Post({ submitFunction }) {
         borderRadius: '20px 20px 0 0',
         fontSize: '20px',
         boxSizing: 'border-box',
-        fontFamily: 'NanumGothicBold',
     }
 
     const inputContentStyle = {
@@ -36,7 +34,6 @@ export default function Post({ submitFunction }) {
         borderTopStyle: 'none',
         fontSize: '20px',
         boxSizing: 'border-box',
-        fontFamily: 'NanumGothicBold',
     }
 
     const postButtonStyle = {
@@ -44,7 +41,6 @@ export default function Post({ submitFunction }) {
         height: '30px',
         margin: "0 0 0 0",
         fontSize: '15px',
-        fontFamily: 'NanumGothic',
         fontWeight: 'light'
     }
 
