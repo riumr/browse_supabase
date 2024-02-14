@@ -132,43 +132,45 @@ export default function Read() {
     }
 
     return (
-        <div>
-            <Post submitFunction={post} />
-            <div style={postGroupStyle}>
-                {data.map((item) => (
-                    <div>
-                        {isEditing && editedRowId === item.id ? (
-                            <div>
-                                <div style={titleEditBtn}>
+        <div className="wrap">
+            <div>
+                <Post submitFunction={post} />
+                <div style={postGroupStyle}>
+                    {data.map((item) => (
+                        <div>
+                            {isEditing && editedRowId === item.id ? (
+                                <div>
+                                    <div style={titleEditBtn}>
+                                        <input
+                                            style={inputTitleStyle}
+                                            type="text"
+                                            defaultValue={item.title}
+                                            onChange={titleChange}
+                                        />
+                                        <button className='editBtn' onClick={() => handleEditClick(item.id)}>수정</button>
+                                    </div>
                                     <input
-                                        style={inputTitleStyle}
+                                        style={inputContentStyle}
                                         type="text"
-                                        defaultValue={item.title}
-                                        onChange={titleChange}
+                                        defaultValue={item.content}
+                                        onChange={contentChange}
                                     />
-                                    <button className='editBtn' onClick={() => handleEditClick(item.id)}>수정</button>
                                 </div>
-                                <input
-                                    style={inputContentStyle}
-                                    type="text"
-                                    defaultValue={item.content}
-                                    onChange={contentChange}
-                                />
-                            </div>
-                        ) : (
-                            <li style={postStyle}>
-                                <div>
-                                    <div>{item.title}</div>
-                                    <div style={contentStyle}>{item.content}</div>
-                                </div>
-                                <div>
-                                    <button className='editBtn' onClick={() => handleEditClick(item.id)}>수정</button>
-                                    <button className='deleteBtn' onClick={() => deleteRow(item.id)}>삭제</button>
-                                </div>
-                            </li>
-                        )}
-                    </div>
-                ))}
+                            ) : (
+                                <li style={postStyle}>
+                                    <div>
+                                        <div>{item.title}</div>
+                                        <div style={contentStyle}>{item.content}</div>
+                                    </div>
+                                    <div>
+                                        <button className='editBtn' onClick={() => handleEditClick(item.id)}>수정</button>
+                                        <button className='deleteBtn' onClick={() => deleteRow(item.id)}>삭제</button>
+                                    </div>
+                                </li>
+                            )}
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     )
