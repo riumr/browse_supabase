@@ -3,7 +3,7 @@ import { supabase } from './supabase';
 import './css/main.css'
 import Post from './Post';
 
-export default function Read() {
+export default function Main() {
     const [data, setData] = useState([]);
     const [isEditing, setEditing] = useState(false);
     const [editedTitle, setEditedTitle] = useState("");
