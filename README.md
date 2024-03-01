@@ -1,8 +1,12 @@
 # browse_supabase
-### layout
-![main-image](readme_image/main-page.png)
+> **전체 레이아웃**
+
 ![전체레이아웃](readme_image/spaCollapseImg01.png)
+
+> **입력 칸**
+
 ![입력칸](readme_image/spaCollapseImg02.png)
+
 ```javascript
 // Post.js
 export default function Post({ submitFunction }) {
@@ -55,5 +59,11 @@ export default function Main() {
     )
 }
 ```
+
+> **출력 칸**
+
 ![출력칸](readme_image/spaCollapseImg03.png)
+
+> **수정 및 삭제**
+
 ![수정및삭제](readme_image/spaCollapseImg04.png)
