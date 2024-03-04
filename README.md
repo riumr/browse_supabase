@@ -14,6 +14,7 @@ export default function Post({ submitFunction }) {
     const [content, setContent] = useState('');
 
     const handleOnclickEvent = () => {
+        // POST 버튼 click 시, 가져올 값이 들어있는 함수에 대한 설정 (해당 함수 : post)
         submitFunction({ title: title, content: content })
         setTitle("")
         setContent("")
@@ -41,6 +42,7 @@ export default function Post({ submitFunction }) {
 // Main.js
 export default function Main() {
     // ...
+    // POST 버튼 클릭 시 supabase DB에 값 insert
     const post = async (inputFromComponent) => {
         try {
             await supabase
