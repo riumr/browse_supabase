@@ -122,7 +122,7 @@ export default function Main() {
     }
 
     const postGroupStyle = {
-        height: '600px',
+        height: '500px',
         overflowY: 'auto'
     }
 
