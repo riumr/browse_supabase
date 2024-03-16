@@ -1,7 +1,7 @@
 # browse_supabase
 > **전체 레이아웃**
 
-![전체레이아웃](readme_image/spaCollapseImg01.png)
+![전체레이아웃](readme_image/spaCollapseImg0101.png)
 
 > **입력 칸**
 
